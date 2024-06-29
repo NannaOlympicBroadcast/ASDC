@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+<h2>Server URL</h2>
+<h3 id="results"></h3>
+接收的形式必须要是json，并且包含两个字段 username、password
+<br>
+<input type="text" id="server" placeholder="https://example.com/api/login" />
+<h2>Username</h2>
+<input type="text" id="uname" placeholder="请输入用户名" />
+<h2>Password</h2>
+<input type="password" id="pwd" placeholder="请输密码" />
+<br>
+<br>
+<button onclick="login()">登录</button>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function login() {
+        var server = document.getElementById("server")
+        var uname = document.getElementById("username")
+        var password = document.getElementById("password")
+        axios.post(
+            server,{username:uname,password:password},{
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }
+        ).then(data=>{console.log(data)}
+
+        ).catch(err=>{
+            document.getElementById("results").innerHTML=err.toString()
+        })
+    }
+</script>
+</html>
